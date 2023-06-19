@@ -1,11 +1,11 @@
+import base64
+from io import BytesIO
 import re
 from flask import Flask, request
-from flask_cors import cross_origin
+from flask_cors import CORS
 import os
 import subprocess
 from PIL import Image
-from io import BytesIO
-import base64
 
 
 app = Flask(__name__)
@@ -17,10 +17,10 @@ port = 5000
 debug = True
 
 app = Flask(__name__)
+CORS(app, resources={r'*': {'origins': 'https://garticphone.com'}})
 
 
 @app.route('/images', methods=['POST'])
-@cross_origin()
 def upload():
     # get image data
     image_data = request.form.get('image')
