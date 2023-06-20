@@ -39,17 +39,13 @@ def upload():
     y1 = request.form.get('y1')
     x2 = request.form.get('x2')
     y2 = request.form.get('y2')
-    pas = "5"
+    pas = request.form.get('pas')
 
-    # start painter.py with the image file
-    # subprocess.check_call([f"python3", "painter.py", "image.png", x1, y1, x2, y2])
-
-    # start GP-lines.exe with the image file
-    subprocess.check_call([f"GP-lines.exe", "image.png",
-                          x1, y1, x2, y2, pas])  # type: ignore
+    print(f"python3 painter.py image.png {x1} {y1} {x2} {y2} {pas}")
 
     # start GP-lines.exe with the image file
-    # subprocess.check_call([f"GP-lines.exe", "image.png", x1, y1, x2, y2])
+    subprocess.check_call(
+        [f"GP-painter-image-app", "image.png", x1, y1, x2, y2, pas])
 
     response = {
         'status': 'success',
